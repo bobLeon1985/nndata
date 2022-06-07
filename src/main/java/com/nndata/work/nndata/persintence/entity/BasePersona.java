@@ -1,7 +1,9 @@
 package com.nndata.work.nndata.persintence.entity;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public class BasePersona {
 
     @Column(name = "nombre")

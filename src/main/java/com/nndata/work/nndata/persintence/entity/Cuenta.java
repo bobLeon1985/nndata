@@ -1,9 +1,13 @@
 package com.nndata.work.nndata.persintence.entity;
 
+import com.nndata.work.nndata.domain.exceptions.InsufficientFundsException;
+
 import java.math.BigDecimal;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name="cuenta")
@@ -25,15 +29,16 @@ public class Cuenta implements Serializable {
 
     @JoinColumn(name = "clienteid", referencedColumnName = "clienteid")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Cliente clienteid;
+    private Optional<Cliente> clienteid;
 
     @OneToMany(mappedBy = "cuentaid", fetch = FetchType.LAZY)
     private List<Movimientos> movimientosList;
 
-    public Cuenta() {
+    public Cuenta(Optional<Cliente> clienteid) {
+        this.clienteid = clienteid;
     }
 
-    public Cuenta(Long cuentaid) {
+    public Cuenta() {
         this.cuentaid = cuentaid;
     }
 
@@ -77,11 +82,11 @@ public class Cuenta implements Serializable {
         this.estado = estado;
     }
 
-    public Cliente getClienteid() {
+    public Optional<Cliente> getClienteid() {
         return clienteid;
     }
 
-    public void setClienteid(Cliente clienteid) {
+    public void setClienteid(Optional<Cliente> clienteid) {
         this.clienteid = clienteid;
     }
 
@@ -93,4 +98,17 @@ public class Cuenta implements Serializable {
         this.movimientosList = movimientosList;
     }
 
+    public void applyMovement(Movimientos movement) throws InsufficientFundsException {
+        if(movement.getTipoMovimiento().equals( TipoMovimiento.CREDIT ) && movement.getValor().compareTo(saldoInicial) > 0 ) {
+            throw new InsufficientFundsException(cuentaid);
+        }
+        switch (movement.getTipoMovimiento()){
+            case "DEBITO":
+                saldoInicial = saldoInicial.add(movement.getValor());
+                return;
+            case "CREDITO":
+                saldoInicial = saldoInicial.subtract(movement.getValor());
+                return;
+        }
+    }
 }

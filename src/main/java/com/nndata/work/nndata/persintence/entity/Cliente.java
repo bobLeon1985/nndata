@@ -20,9 +20,9 @@ public class Cliente extends BasePersona implements Serializable {
     @Column(name = "estado")
     private Boolean estado;
 
-    @JoinColumn(name = "personaid", referencedColumnName = "personaid")
+    /*@JoinColumn(name = "personaid", referencedColumnName = "personaid")
     @OneToOne(fetch = FetchType.LAZY)
-    private Persona personaid;
+    private Persona personaid;*/
 
     @OneToMany(mappedBy = "clienteid", fetch = FetchType.LAZY)
         private List<Cuenta> cuentaList;
@@ -58,13 +58,12 @@ public class Cliente extends BasePersona implements Serializable {
         this.estado = estado;
     }
 
-    public Persona getPersonaid() {
+    /*public Persona getPersonaid() {
         return personaid;
     }
-
     public void setPersonaid(Persona personaid) {
         this.personaid = personaid;
-    }
+    }*/
 
     public List<Cuenta> getCuentaList() {
         return cuentaList;

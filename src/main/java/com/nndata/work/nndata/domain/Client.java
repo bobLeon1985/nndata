@@ -1,15 +1,9 @@
 package com.nndata.work.nndata.domain;
 
-import com.nndata.work.nndata.persintence.entity.Cuenta;
-import com.nndata.work.nndata.persintence.entity.Persona;
-
-import java.util.List;
-
 public class Client {
     private Long clientId;
     private String password;
     private Boolean state;
-    private Persona item;
 
     public Long getClientId() {
         return clientId;
@@ -35,11 +29,5 @@ public class Client {
         this.state = state;
     }
 
-    public Persona getItem() {
-        return item;
-    }
 
-    public void setItem(Persona item) {
-        this.item = item;
-    }
 }

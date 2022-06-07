@@ -11,17 +11,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
-    @Mappings({
-            @Mapping(source = "clienteid", target = "clientId"),
-            @Mapping(source = "contrasenia", target = "password"),
-            @Mapping(source = "estado", target = "state"),
-            @Mapping(source = "personaid", target = "item"),
-            //@Mapping(source = "cuentaList" , target = "cuentaList")
-    })
-    Client toClient(Cliente cliente);
-    List<Client> toClients (List<Cliente> clientes);
 
-    @InheritInverseConfiguration
-    @Mapping(target = "cuentaList", ignore = true)
-    Cliente toCliente(Client client);
+//    Client toClient(Cliente cliente);
+ //   List<Client> toClients (List<Cliente> clientes);
+
+    //@InheritInverseConfiguration
+    //@Mapping(target = "cuentaList", ignore = true)
+    //Cliente toCliente(Client client);
 }

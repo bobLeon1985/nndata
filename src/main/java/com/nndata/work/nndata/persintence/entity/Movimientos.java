@@ -21,16 +21,18 @@ public class Movimientos implements Serializable {
 
     @Column(name = "tipo_movimiento")
     private String tipoMovimiento;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Column(name = "valor")
     private BigDecimal valor;
+
     @Column(name = "saldo")
     private BigDecimal saldo;
+
     @JoinColumn(name = "cuentaid", referencedColumnName = "cuentaid")
     @ManyToOne(fetch = FetchType.LAZY)
     private Cuenta cuentaid;
 
-    public Movimientos() {
+    public Movimientos(TipoMovimiento _type, Date date, BigDecimal ammount) {
     }
 
     public Movimientos(Long movimientosid) {
