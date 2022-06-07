@@ -34,6 +34,7 @@ public class CuentaRepository implements AccountRepository {
     @Override
     public Cuenta saveEmptyAccountForClientWithId(Long clientId) throws ClientDoesntExistException {
         Optional<Cliente> client = clienteCrudRepository.findById(clientId);
+
         if(client == null){
             throw new ClientDoesntExistException(clientId);
         } else {
@@ -45,10 +46,11 @@ public class CuentaRepository implements AccountRepository {
     @Override
     public List<AccountReport> filterAccounts(Long clientId, Date start, Date end) throws ClientDoesntExistException {
         Optional<Cliente> client = clienteCrudRepository.findById(clientId);
+        Cliente cli = client.get();
         if(client == null){
             throw new ClientDoesntExistException(clientId);
         } else {
-            return client.getAccounts()
+            return cli.getCuentaList()
                     .stream()
                     .map(account -> AccountReport.fromAccount(account, start, end))
                     .collect(Collectors.toList());

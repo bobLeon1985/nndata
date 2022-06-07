@@ -1,5 +1,6 @@
 package com.nndata.work.nndata.domain.service;
 
+import com.nndata.work.nndata.domain.dto.AccountReport;
 import com.nndata.work.nndata.domain.exceptions.ClientDoesntExistException;
 import com.nndata.work.nndata.domain.repository.AccountRepository;
 import com.nndata.work.nndata.persintence.entity.Cuenta;
